@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack AI | Professional Wealth Advisor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="logo-text">
+                <div class="logo">FinTrack</div>
+                <div class="logo-subtitle">AI</div>
+            </div>
+        </div>
+        
+        <nav class="menu-items">
+            <a href="#" class="menu-item active" title="Dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item" title="Analytics">
+                <i class="fas fa-analytics"></i>
+                <span>Analytics</span>
+            </a>
+            <a href="#" class="menu-item" title="Portfolio">
+                <i class="fas fa-wallet"></i>
+                <span>Portfolio</span>
+            </a>
+            <a href="#" class="menu-item" title="Settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=3b82f6&color=fff" alt="User Avatar">
+                <div class="user-info">
+                    <div class="user-name">User</div>
+                    <div class="user-status">Premium</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header class="top-header">
+            <div class="header-title">
+                <h1>Market Overview</h1>
+                <p>Real-time financial insights powered by AI</p>
+            </div>
+            <button class="upgrade-btn">
+                <i class="fas fa-star"></i> Upgrade to Pro
+            </button>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Nifty 50</div>
+                    <div class="card-value">22,450</div>
+                    <div class="card-change positive">
+                        <i class="fas fa-arrow-up"></i> +2.45%
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-icon gold">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Gold Price</div>
+                    <div class="card-value">₹65,400</div>
+                    <div class="card-change positive">
+                        <i class="fas fa-arrow-up"></i> +1.20%
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-icon crypto">
+                    <i class="fab fa-bitcoin"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Bitcoin</div>
+                    <div class="card-value">$72,120</div>
+                    <div class="card-change negative">
+                        <i class="fas fa-arrow-down"></i> -0.85%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome-section">
+            <div class="welcome-card">
+                <div class="welcome-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="welcome-content">
+                    <h2>Meet Your AI Assistant</h2>
+                    <p>Talk to our AI advisor for instant financial insights, market analysis, and investment recommendations. Click the chat icon to get started.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <div id="chat-icon" class="chat-icon" onclick="toggleChat()" title="Open Chat">
+        <i class="fas fa-comments"></i>
+        <span class="notification-badge">1</span>
+    </div>
+
+    <!-- Chat Container -->
+    <div id="chat-container" class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                <span>FinTrack AI</span>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div id="chat-messages" class="chat-messages"></div>
+        
+        <div class="chat-input-area">
+            <input 
+                type="text" 
+                id="user-input" 
+                class="chat-input" 
+                placeholder="Ask me about markets, investments..."
+                onkeypress="if(event.key==='Enter') sendMessage()"
+            >
+            <button class="chat-send-btn" onclick="sendMessage()" title="Send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chat = document.getElementById('chat-container');
+            const icon = document.getElementById('chat-icon');
+            
+            if (chat.classList.contains('active')) {
+                chat.classList.remove('active');
+                icon.classList.remove('active');
+            } else {
+                chat.classList.add('active');
+                icon.classList.add('active');
+                document.getElementById('user-input').focus();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const messages = document.getElementById('chat-messages');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            // Display user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user-message';
+            userDiv.textContent = text;
+            messages.appendChild(userDiv);
+            input.value = '';
+
+            // Show typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message ai-message typing';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            messages.appendChild(typingDiv);
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Remove typing indicator
+                typingDiv.remove();
+                
+                // Display AI response
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'message ai-message';
+                aiDiv.textContent = data.reply;
+                messages.appendChild(aiDiv);
+            } catch (error) {
+                typingDiv.remove();
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'message ai-message error';
+                errorDiv.textContent = `Error: ${error.message}`;
+                messages.appendChild(errorDiv);
+            }
+            
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // Allow Enter key to send message
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('user-input') === document.activeElement) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
