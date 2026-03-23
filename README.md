@@ -1,50 +1,45 @@
-# FinTrack AI Chatbox Web
+# 📈 FinTrack AI | Agentic Financial Advisor
 
-A Flask-based AI chatbot with web interface that uses HuggingFace's Llama LLM and live web search capabilities.
+FinTrack AI is a modern financial dashboard that combines a sleek UI with a high-performance **AI-Powered Chatbox**. Instead of relying on static data, this platform uses an agentic workflow to research the live web, providing users with real-time financial insights and market analysis.
 
-## Features
-- Real-time web search integration (DuckDuckGo)
-- AI-powered responses using HuggingFace Inference API
-- Beautiful chat UI with responsive design
-- Live market data display
+---
 
-## Setup
+## 🤖 The AI Chatbox: Retrieval-Augmented Generation (RAG)
 
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+The heart of this project is the **Agentic Chat Assistant**. Unlike standard chatbots, this assistant doesn't just "chat"—it researches. It is powered by a custom **RAG (Retrieval-Augmented Generation)** pipeline.
 
-### 2. Set Up Environment Variables
-```bash
-cp .env.example .env
-# Edit .env and add your HuggingFace API key
-```
+### 🧠 How the AI Brain Works
+When you ask a question like *"What is the current trend for Nvidia stock?"* or *"Should I invest in Gold today?"*, the AI follows a 3-step process:
 
-Get your API key from: https://huggingface.co/settings/tokens
+1.  **Web Retrieval:** The system identifies the need for real-time data and triggers the **DuckDuckGo Search API** to scan the latest financial news and market reports.
+2.  **Context Augmentation:** The top search results are parsed and injected into the AI's "short-term memory" as factual context.
+3.  **Llama 3.1 Reasoning:** Using the **Meta Llama-3.1-8B-Instruct** model (via Hugging Face), the agent synthesizes the live data and the user query to provide a professional, data-backed response.
 
-### 3. Run the Application
-```bash
-python app.py
-```
 
-The app will start at `http://localhost:5000`
 
-## Files Overview
-- **app.py** - Main Flask application with API routes
-- **train.py** - Naive Bayes model training (optional, not used in current version)
-- **intents.json** - Sample intents data
-- **templates/index.html** - Web UI
-- **static/style.css** - Styling
+### ⚡ Key AI Features
+* **Zero Knowledge Cutoff:** By using live web search, the AI is always aware of market moves that happened minutes ago.
+* **Hallucination-Free:** Every financial insight is grounded in real-time search results, drastically reducing the "guessing" common in standard AI.
+* **Agentic Decision Making:** The system intelligently decides *when* to search the web and *when* to use its internal reasoning.
 
-## Usage
-1. Open http://localhost:5000 in your browser
-2. Click the robot icon in the bottom right
-3. Type your question and send
-4. The AI will search the web and provide an answer
+---
 
-## Fixed Issues
-✓ Exposed API key moved to environment variables
-✓ XSS vulnerability fixed with proper HTML escaping
-✓ Better error handling and validation
-✓ Improved async error catching in frontend
+## 🛠️ Tech Stack
+
+* **Backend:** Python & Flask
+* **LLM:** Llama 3.1 (8B Instruct) 
+* **Inference:** Hugging Face API
+* **Search Engine:** DuckDuckGo Search API
+* **Frontend:** Custom CSS/JS Fintech Dashboard
+* **Deployment:** Render Cloud
+
+---
+
+## 📂 Folder Structure
+
+```text
+├── app.py              # Main Flask server & AI/RAG logic
+├── requirements.txt    # Production-ready dependencies
+├── static/             # CSS and JavaScript assets
+├── templates/          # HTML Structure (Dashboard & Chat Widget)
+└── .gitignore          # Security shield for private tokens
